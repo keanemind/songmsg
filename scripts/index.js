@@ -1,5 +1,5 @@
 var redirect = function () {
-    const client_id = 'a306c77b15cc46b7a80ed913f4a4a206';
+    const client_id = '874f7bfba973402f89d7984cfaa8106c';
     const base_uri = (
         window.location.protocol + '//' + window.location.hostname + window.location.pathname
     ); // needs testing with browsers other than Chrome

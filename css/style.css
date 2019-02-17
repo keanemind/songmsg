@@ -6,6 +6,10 @@ body {
     background-color: rgb(255, 223, 234)
 }
 
+input {
+    -webkit-appearance: none;
+}
+
 #view {
     width: 90%;
     margin: auto;

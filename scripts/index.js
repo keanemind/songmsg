@@ -127,7 +127,6 @@ function makePlaylist(accessToken) {
                     const playlistID = resp['id'];
                     resolve([tracksEndpoint, playlistURL, playlistID]);
                 } else {
-                    console.log('status: ' + request.status);
                     reject(Error(request.statusText));
                 }
             }

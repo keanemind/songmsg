@@ -32,30 +32,37 @@ function displayResult(link) {
 }
 
 function performAPIRequests(accessToken, words) {
+    let trackURIs;
+    let tracksEndpoint;
+    let playlistURL;
+    let playlistID;
     searchSongs(accessToken, words).then(function(tracks) {
-        makePlaylist(accessToken).then(function(res) {
-            tracksEndpoint = res[0];
-            playlistURL = res[1];
-            addTracks(
-                accessToken, words, tracks, tracksEndpoint
-            ).then(function() {
-                // Redirect
-                window.location.replace(
-                    base_uri + '#link=' + encodeURIComponent(playlistURL)
-                );
-            }, function(error) {
-                // A song could not be added to the playlist
-                console.error(error);
-
-                // Delete new playlist
-            });
-        }, function(error) {
-            // A new playlist could not be created
-            console.error(error);
-        });
+        trackURIs = tracks;
+        return makePlaylist(accessToken);
+    }).then(function(res) {
+        tracksEndpoint = res[0];
+        playlistURL = res[1];
+        playlistID = res[2];
+        return addTracks(accessToken, words, trackURIs, tracksEndpoint);
+    }).then(function() {
+        // Redirect
+        window.location.replace(
+            base_uri + '#link=' + encodeURIComponent(playlistURL)
+        );
     }, function(error) {
-        // A song could not be found
+        // Something failed
         console.error(error);
+
+        // Remove new playlist if created
+        if (playlistID) {
+            unfollowPlaylist(
+                accessToken,
+                playlistID
+            ).then(undefined, function(error) {
+                // Failed to unfollow playlist
+                console.error(error);
+            });
+        }
     });
 }
 
@@ -116,8 +123,9 @@ function makePlaylist(accessToken) {
                 if (isSuccess(request.status)) {
                     const resp = JSON.parse(request.responseText);
                     const tracksEndpoint = resp['tracks']['href'];
-                    const newPlaylistURL = resp['external_urls']['spotify'];
-                    resolve([tracksEndpoint, newPlaylistURL]);
+                    const playlistURL = resp['external_urls']['spotify'];
+                    const playlistID = resp['id'];
+                    resolve([tracksEndpoint, playlistURL, playlistID]);
                 } else {
                     console.log('status: ' + request.status);
                     reject(Error(request.statusText));
@@ -136,6 +144,28 @@ function makePlaylist(accessToken) {
         }, function(error) {
             reject(error);
         });
+    });
+}
+
+function unfollowPlaylist(accessToken, playlistID) {
+    return new Promise(function(resolve, reject) {
+        const request = new XMLHttpRequest();
+        request.onload = function() {
+            if (isSuccess(request.status)) {
+                resolve();
+            } else {
+                reject(Error(request.statusText));
+            }
+        }
+        request.onerror = function() {
+            reject(Error('Network Error'));
+        };
+        request.open(
+            'DELETE',
+            'https://api.spotify.com/v1/playlists/' + playlistID + '/followers'
+        );
+        request.setRequestHeader('Authorization', 'Bearer ' + accessToken);
+        request.send();
     });
 }
 

@@ -34,6 +34,10 @@ input {
     box-shadow: 2px 4px black;
 }
 
+#text-field:hover {
+    border-color: black;
+}
+
 #submit-button {
     font-size: 40pt;
     margin-left: 10px;
@@ -45,23 +49,17 @@ input {
     box-shadow: 2px 4px black;
 }
 
-#submit-button:hover,
-#submit-button:focus {
+#submit-button:hover {
+    border-color: black;
+}
+
+#submit-button:active {
     position: relative;
     left: 1px;
     top: 2px;
 
     background-color: lightblue;
     box-shadow: 1px 2px black;
-}
-
-#submit-button:active {
-    position: relative;
-    left: 2px;
-    top: 4px;
-
-    background-color: lightblue;
-    box-shadow: none;
 }
 
 #submit-button-img {

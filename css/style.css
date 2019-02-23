@@ -19,6 +19,12 @@ input {
     text-align: center;
 }
 
+#graphic {
+    width: 40%;
+    max-width: 450px;
+    margin: 50px 0px;
+}
+
 #input-form {
     display: flex;
     justify-content: center;
@@ -28,6 +34,7 @@ input {
     font-size: 40pt;
     max-width: 70%;
 
+    padding-left: 5px;
     border: solid;
     border-color: grey;
     border-radius: 6px;
@@ -79,8 +86,13 @@ input {
 }
 
 @media only screen and (max-width: 750px) {
+    #graphic {
+        width: 70%;
+    }
+
     #text-field {
         font-size: 20pt;
+        max-width: 80%;
     }
 
     #submit-button {

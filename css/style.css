@@ -23,6 +23,8 @@ input {
     width: 40%;
     max-width: 450px;
     margin: 50px 0px;
+
+    filter: drop-shadow(2px 4px 0px black);
 }
 
 #input-form {

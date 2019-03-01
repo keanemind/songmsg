@@ -20,8 +20,8 @@ input {
 }
 
 #graphic {
-    width: 40%;
-    max-width: 450px;
+    width: 60%;
+    max-width: 700px;
     margin: 50px 0px;
 
     filter: drop-shadow(2px 4px 0px black);
@@ -87,9 +87,9 @@ input {
     text-align: center;
 }
 
-@media only screen and (max-width: 750px) {
+@media only screen and (max-width: 650px) {
     #graphic {
-        width: 70%;
+        width: 80%;
     }
 
     #text-field {

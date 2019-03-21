@@ -139,7 +139,7 @@ function makePlaylist(accessToken) {
             );
             request.setRequestHeader('Authorization', 'Bearer ' + accessToken);
             request.setRequestHeader('Content-Type', 'application/json');
-            request.send('{"name": "Diss Playlist"}');
+            request.send('{"name": "Song Message"}');
         }, function(error) {
             reject(error);
         });
@@ -237,4 +237,9 @@ function redirect() {
         '&state=' + state
     );
     return false;
+}
+
+function redirect1() {
+    document.getElementById('spotify-button').style.display = 'none';
+    document.getElementById('input-form').style.display = 'flex';
 }

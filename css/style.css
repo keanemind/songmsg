@@ -14,6 +14,10 @@ input {
     text-align: center;
 }
 
+.vertical-align-middle {
+    vertical-align: middle;
+}
+
 .no-margins {
     margin: 0px;
 }
@@ -36,7 +40,7 @@ input {
 }
 
 #input-form {
-    display: flex;
+    display: none; /* js will change this to flex */
     justify-content: center;
 }
 
@@ -55,9 +59,8 @@ input {
     border-color: black;
 }
 
-#submit-button {
+#spotify-button {
     font-size: 40pt;
-    margin-left: 10px;
 
     background-color: white;
     border: solid;
@@ -66,11 +69,11 @@ input {
     box-shadow: 2px 4px black;
 }
 
-#submit-button:hover {
+#spotify-button:hover {
     border-color: black;
 }
 
-#submit-button:active {
+#spotify-button:active {
     position: relative;
     left: 1px;
     top: 2px;
@@ -79,9 +82,11 @@ input {
     box-shadow: 1px 2px black;
 }
 
-#submit-button-img {
-    width: 40px;
-    height: 40px;
+#spotify-button-img {
+    vertical-align: middle;
+}
+
+#playlist-img {
 }
 
 #footer {

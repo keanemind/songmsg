@@ -14,6 +14,10 @@ input {
     text-align: center;
 }
 
+.no-margins {
+    margin: 0px;
+}
+
 #view {
     width: 90%;
     margin: auto;

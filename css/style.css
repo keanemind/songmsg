@@ -22,9 +22,13 @@ input {
 #graphic {
     width: 60%;
     max-width: 700px;
-    margin: 50px 0px;
+    margin: 50px 0px 0px 0px;
 
     filter: drop-shadow(2px 4px 0px black);
+}
+
+#subtitle {
+    margin-top: 40px;
 }
 
 #input-form {
@@ -90,6 +94,10 @@ input {
 @media only screen and (max-width: 650px) {
     #graphic {
         width: 80%;
+    }
+
+    #subtitle {
+        font-size: 1.5em;
     }
 
     #text-field {

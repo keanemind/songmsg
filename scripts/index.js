@@ -6,6 +6,8 @@ const base_uri = (
 // window.location.pathname includes leading slash?
 // window.location.hostname trailing slash?
 
+let url_params = undefined;
+
 function isSuccess(statusCode) {
     return Math.floor(statusCode / 100) === 2;
 }
@@ -18,12 +20,11 @@ if (window.location.hash) {
         result[item[0]] = decodeURIComponent(item[1]);
     });
 
-    if (result['state'] && result['access_token']) {
+    if (result['access_token']) {
         // Spotify just redirected here
-        performAPIRequests(result['access_token'], result['state'].split(' '));
-    } else if (result['link']) {
-        // performAPIRequsts() just redirected here
-        displayResult(result['link']);
+        url_params = result;
+        document.getElementById('spotify-button').style.display = 'none';
+        document.getElementById('input-form').style.display = 'flex';
     }
 }
 
@@ -31,7 +32,15 @@ function displayResult(link) {
     alert("Here's your link: " + link)
 }
 
-function performAPIRequests(accessToken, words) {
+function performAPIRequests() {
+    if (document.getElementById('text-field').value == '') {
+        // No input
+        return false;
+    }
+
+    const accessToken = url_params['access_token'];
+    const words = document.getElementById('text-field').value.split(' ');
+
     let trackURIs;
     let tracksEndpoint;
     let playlistURL;
@@ -45,10 +54,8 @@ function performAPIRequests(accessToken, words) {
         playlistID = res[2];
         return addTracks(accessToken, words, trackURIs, tracksEndpoint);
     }).then(function() {
-        // Redirect
-        window.location.replace(
-            base_uri + '#link=' + encodeURIComponent(playlistURL)
-        );
+        displayResult(playlistURL);
+        document.getElementById('text-field').value = '';
     }, function(error) {
         // Something failed
         console.error(error);
@@ -64,6 +71,7 @@ function performAPIRequests(accessToken, words) {
             });
         }
     });
+    return false;
 }
 
 function searchSongs(accessToken, words) {
@@ -219,27 +227,15 @@ function getUserId(accessToken) {
 }
 
 function redirect() {
-    if (document.getElementById('text-field').value == '') {
-        // No input
-        return false;
-    }
     const client_id = '874f7bfba973402f89d7984cfaa8106c';
     const redirect_uri = encodeURIComponent(base_uri);
     const scope = encodeURIComponent('playlist-modify-public playlist-modify-private');
     const response_type = 'token';
-    const state = encodeURIComponent(document.getElementById('text-field').value);
     window.location.href = (
         'https://accounts.spotify.com/authorize?' +
         'client_id=' + client_id +
         '&redirect_uri=' + redirect_uri +
         '&scope=' + scope +
-        '&response_type=' + response_type +
-        '&state=' + state
+        '&response_type=' + response_type
     );
-    return false;
-}
-
-function redirect1() {
-    document.getElementById('spotify-button').style.display = 'none';
-    document.getElementById('input-form').style.display = 'flex';
 }

@@ -11,11 +11,11 @@
             <img src="images/graphic.png" id="graphic" alt="Song Message">
             <h1 id="subtitle">Turn words into a Spotify playlist!</h1>
         </div>
-        <button id="spotify-button" onclick="return redirect1();">
+        <button id="spotify-button" onclick="return redirect();">
             <span class="vertical-align-middle">Connect</span>
             <img id="spotify-button-img" class="vertical-align-middle" src="images/icons8-spotify.svg" alt="Spotify icon">
         </button>
-        <form id="input-form" action="." onsubmit="return redirect();">
+        <form id="input-form" action="." onsubmit="return performAPIRequests();">
             <input id="text-field" type="text" autocomplete="off" placeholder="type a message" autofocus>
         </form>
         <h1>Example: "You are dumb dumb" creates</h1>

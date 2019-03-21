@@ -87,6 +87,7 @@ input {
 }
 
 #playlist-img {
+    max-width: 100%;
 }
 
 #footer {
@@ -94,12 +95,12 @@ input {
 }
 
 @media only screen and (max-width: 650px) {
-    #graphic {
-        width: 80%;
+    h1 {
+        font-size: 1.5em;
     }
 
-    #subtitle {
-        font-size: 1.5em;
+    #graphic {
+        width: 80%;
     }
 
     #text-field {
@@ -107,11 +108,11 @@ input {
         max-width: 80%;
     }
 
-    #submit-button {
+    #spotify-button {
         font-size: 20pt;
     }
 
-    #submit-button-img {
+    #spotify-button-img {
         width: 20px;
         height: 20px;
     }

@@ -22,14 +22,9 @@ input {
     margin: 0px;
 }
 
-#view {
-    width: 90%;
-    margin: auto;
-}
-
 #graphic {
     width: 60%;
-    max-width: 700px;
+    max-width: 650px;
     margin: 50px 0px 0px 0px;
 
     filter: drop-shadow(2px 4px 0px black);
@@ -95,13 +90,13 @@ input {
     margin-top: 50px;
 }
 
-@media only screen and (max-width: 650px) {
+@media only screen and (max-width: 600px) {
     h1 {
         font-size: 1.5em;
     }
 
     #graphic {
-        width: 80%;
+        width: 100%;
     }
 
     #text-field {

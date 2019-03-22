@@ -51,11 +51,11 @@ function textFieldEditHandler(event) {
 
 function textFieldClickHandler(event) {
   event.stopPropagation();
-  console.log('Open autocomplete list if not already open')
+  displayAutoComplete();
 }
 
 function documentClickHandler(event) {
-  console.log('Close autocomplete list');
+  hideAutoComplete();
 }
 
 /* Logic Functions */
@@ -290,4 +290,33 @@ function displayInputView() {
 function displayAuthView() {
   document.getElementById('spotify-button').style.display = null;
   document.getElementById('input-form').style.display = 'none';
+}
+
+function displayAutoComplete() {
+  hideAutoComplete();
+  const elem = document.createElement('div');
+  elem.textContent = 'hi';
+
+  const elem1 = document.createElement('div');
+  elem1.textContent = 'bye';
+
+  const list = document.createElement('div');
+  list.appendChild(elem);
+  list.appendChild(elem1);
+  list.setAttribute('class', 'autocomplete-items');
+
+  const autocomplete = document.getElementsByClassName('autocomplete')[0];
+  autocomplete.appendChild(list);
+
+  document.getElementById('text-field').style.borderBottomColor = 'transparent';
+  document.getElementById('text-field').style.borderRadius = '6px 6px 0px 0px';
+}
+
+function hideAutoComplete() {
+  const elems = document.getElementsByClassName("autocomplete-items");
+  for (let i = 0; i < elems.length; i++) {
+    elems[i].parentNode.removeChild(elems[i]);
+  }
+  document.getElementById('text-field').style.borderBottom = null;
+  document.getElementById('text-field').style.borderRadius = null;
 }

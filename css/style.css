@@ -22,6 +22,38 @@ input {
     margin: 0px;
 }
 
+.max-width-70-90 {
+    max-width: 70%;
+}
+
+.autocomplete {
+    position: relative;
+}
+
+.autocomplete-items {
+    position: absolute;
+    border: 2px solid black;
+    border-radius: 0px 0px 6px 6px;
+    border-top: none;
+    z-index: 99;
+    top: 100%;
+    left: 0;
+    right: 0;
+
+    padding: 3px;
+    background-color: white;
+    box-shadow: 2px 4px black;
+}
+
+.autocomplete-items > div {
+    text-align: left;
+    background-color: white;
+}
+
+.autocomplete-items > div:hover {
+    background-color: #e9e9e9;
+}
+
 #graphic {
     width: 60%;
     max-width: 650px;
@@ -41,8 +73,9 @@ input {
 
 #text-field {
     font-size: 40pt;
-    max-width: 70%;
+    max-width: 100%;
 
+    box-sizing: border-box;
     padding-left: 5px;
     border: solid;
     border-color: grey;
@@ -50,7 +83,8 @@ input {
     box-shadow: 2px 4px black;
 }
 
-#text-field:hover {
+#text-field:hover,
+#text-field:focus {
     border-color: black;
 }
 
@@ -95,13 +129,16 @@ input {
         font-size: 1.5em;
     }
 
+    .max-width-70-90 {
+        max-width: 90%;
+    }
+
     #graphic {
         width: 100%;
     }
 
     #text-field {
         font-size: 20pt;
-        max-width: 80%;
     }
 
     #spotify-button {

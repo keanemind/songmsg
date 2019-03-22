@@ -1,3 +1,9 @@
+document.getElementById('spotify-button').addEventListener('click', spotifyButtonClickHandler);
+document.getElementById('input-form').addEventListener('submit', formSubmitHandler);
+document.getElementById('text-field').addEventListener('input', textFieldEditHandler);
+document.getElementById('text-field').addEventListener('click', textFieldClickHandler);
+document.addEventListener('click', documentClickHandler);
+
 const base_uri = (
     window.location.protocol + '//' +
     window.location.hostname +
@@ -7,10 +13,6 @@ const base_uri = (
 // window.location.hostname trailing slash?
 
 let url_params = undefined;
-
-function isSuccess(statusCode) {
-    return Math.floor(statusCode / 100) === 2;
-}
 
 if (window.location.hash) {
     const hash = window.location.hash.substr(1);
@@ -23,13 +25,53 @@ if (window.location.hash) {
     if (result['access_token']) {
         // Spotify just redirected here
         url_params = result;
-        document.getElementById('spotify-button').style.display = 'none';
-        document.getElementById('input-form').style.display = 'flex';
+        displayInputView();
     }
 }
 
-function displayResult(link) {
-    alert("Here's your link: " + link)
+/* Event Handlers */
+
+function spotifyButtonClickHandler(event) {
+    event.preventDefault();
+    redirect();
+}
+
+function formSubmitHandler(event) {
+    event.preventDefault();
+    performAPIRequests();
+}
+
+function textFieldEditHandler(event) {
+    if (!event) {
+        event = window.event;
+    }
+    console.log(event.inputType);
+    console.log(document.getElementById('text-field').value);
+}
+
+function textFieldClickHandler(event) {
+    event.stopPropagation();
+    console.log('Open autocomplete list if not already open')
+}
+
+function documentClickHandler(event) {
+    console.log('Close autocomplete list');
+}
+
+/* Logic Functions */
+
+function redirect() {
+    const client_id = '874f7bfba973402f89d7984cfaa8106c';
+    const redirect_uri = encodeURIComponent(base_uri);
+    const scope = encodeURIComponent('playlist-modify-public playlist-modify-private');
+    const response_type = 'token';
+    window.location.href = (
+        'https://accounts.spotify.com/authorize?' +
+        'client_id=' + client_id +
+        '&redirect_uri=' + redirect_uri +
+        '&scope=' + scope +
+        '&response_type=' + response_type
+    );
 }
 
 function performAPIRequests() {
@@ -226,16 +268,26 @@ function getUserId(accessToken) {
     });
 }
 
-function redirect() {
-    const client_id = '874f7bfba973402f89d7984cfaa8106c';
-    const redirect_uri = encodeURIComponent(base_uri);
-    const scope = encodeURIComponent('playlist-modify-public playlist-modify-private');
-    const response_type = 'token';
-    window.location.href = (
-        'https://accounts.spotify.com/authorize?' +
-        'client_id=' + client_id +
-        '&redirect_uri=' + redirect_uri +
-        '&scope=' + scope +
-        '&response_type=' + response_type
-    );
+function isSuccess(statusCode) {
+    return Math.floor(statusCode / 100) === 2;
+}
+
+/* UI Functions */
+
+function displayResult(link) {
+    alert("Here's your link: " + link);
+}
+
+function displayAlert(message) {
+    alert(message);
+}
+
+function displayInputView() {
+    document.getElementById('spotify-button').style.display = 'none';
+    document.getElementById('input-form').style.display = 'flex';
+}
+
+function displayAuthView() {
+    document.getElementById('spotify-button').style.display = null;
+    document.getElementById('input-form').style.display = 'none';
 }

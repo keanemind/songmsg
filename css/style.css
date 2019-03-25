@@ -14,8 +14,31 @@ body {
     background-color: rgb(255, 223, 234)
 }
 
+/* Allow styling of clickable inputs for iOS Safari */
 input {
     -webkit-appearance: none;
+}
+
+/* Button CSS reset */
+button {
+    border: none;
+    margin: 0px;
+    padding: 0px;
+
+    overflow: visible;
+    background: transparent;
+
+    color: inherit;
+    font: inherit;
+
+    line-height: normal;
+}
+
+/* Remove excess padding and border in Firefox 4+ */
+input::-moz-focus-inner,
+button::-moz-focus-inner {
+    border: none;
+    padding: 0px;
 }
 
 .text-center {
@@ -99,6 +122,7 @@ input {
     font-size: 40pt;
     line-height: 0;
 
+    padding: 1px 6px;
     background-color: white;
     border: solid;
     border-color: grey;

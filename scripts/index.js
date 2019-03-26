@@ -4,6 +4,15 @@ document.getElementById('text-field').addEventListener('input', textFieldEditHan
 document.getElementById('text-field').addEventListener('click', textFieldClickHandler);
 document.addEventListener('click', documentClickHandler);
 
+/* Hack to make touches fire click events properly in iOS */
+const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+if (iOS) {
+  const css = document.createElement('style');
+  css.type = 'text/css';
+  css.innerHTML = '* { cursor: pointer; }';
+  document.head.appendChild(css);
+}
+
 const base_uri = (
   window.location.protocol + '//' +
   window.location.hostname +

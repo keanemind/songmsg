@@ -67,6 +67,7 @@ button::-moz-focus-inner {
     left: 0;
     right: 0;
     z-index: 99;
+    font-size: 20pt;
 
     padding: 3px;
     background-color: white;
